@@ -1,5 +1,5 @@
-var models = require('../config/config');
-var Book = models.Book;
+let models = require('../config/config');
+let Book = models.Book;
 
 exports.getAll = function (req, res) {
     models.Book.findAll({}).then((result) => {
@@ -7,7 +7,36 @@ exports.getAll = function (req, res) {
     });
 };
 
-exports.getAllByUser = function (req, res) {
+exports.getBookById = function(req,res){
+    models.Book.findOne({
+        where : {
+            id : req.params.id
+        }
+    }).then( book => { 
+        if(book){
+            res.status(200).send({
+                data: book,
+                message: 'Book fetched',
+                statusCode: '200',
+                statusType: 'success'
+            });
+        } else {
+            res.status(404).send({
+                statusCode: 404,
+                message: 'Book with given id does not exist',
+                statusType: 'error'
+            })
+        }
+    }).catch(err => { 
+        res.status(404).send({
+            statusCode: 404,
+            message: err.message,
+            statusType: 'error'
+        })
+    });
+}
+
+exports.getAllBooksByUser = function (req, res) {
     models.Book.findAll({
         where: {
             borrowedBy: req.params.userId,
@@ -18,7 +47,6 @@ exports.getAllByUser = function (req, res) {
 };
 
 exports.createBook = function(req, res) {
-    console.log(req.body);
     var new_book = new Book(req.body);
     new_book.save()
             .then( book => { 
@@ -41,18 +69,25 @@ exports.createBook = function(req, res) {
 exports.deleteBook = function(req,res){
     Book.destroy({
         where: {
-            id: req.params.bookId
+            id: req.params.id
         }
     }).then( deleted => { 
-        res.status(200).send({
-                data: book,
+        if(deleted != 0){
+            res.status(204).send({
                 message: 'Book deleted',
-                statusCode: '200',
+                statusCode: '204',
                 statusType: 'success'
-        })
+            })
+        } else {
+            res.status(404).send({
+                message: 'Book does not exist',
+                statusCode: '404',
+                statusType: 'failed'
+            })
+        }
     }).catch(err => {
         res.status(400).send({
-            statusCode: 404,
+            statusCode: 400,
             message: err.message,
             statusType: 'error'
         })
@@ -64,7 +99,7 @@ exports.updateBook = function(req,res){
             title: req.body.title
             },{
             where: {
-                id: req.params.bookId
+                id: req.params.id
             }
     }).then(updated => { 
         if(updated !=0 ){
@@ -75,7 +110,6 @@ exports.updateBook = function(req,res){
                 statusType: 'success'
             })
         }
-        throw err;
     }).catch(err => {
         res.status(404).send({
             statusCode: 404,

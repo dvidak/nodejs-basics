@@ -16,7 +16,7 @@ exports.getAll = function (req, res) {
 exports.getUserById = function(req,res){
     models.Users.findOne({
         where : {
-            id : req.params.userId
+            id : req.params.id
         }
     }).then( user => { 
         if(user){
@@ -26,8 +26,13 @@ exports.getUserById = function(req,res){
                 statusCode: '200',
                 statusType: 'success'
             });
+        } else {
+            res.status(404).send({
+                statusCode: 404,
+                message: 'User with given id does not exist',
+                statusType: 'error'
+            })
         }
-       throw err;
     }).catch(err => { 
         res.status(404).send({
             statusCode: 404,
@@ -50,8 +55,13 @@ exports.deleteUser = function (req,res){
                 statusCode: '204',
                 statusType: 'success'
             })
+        } else {
+            res.status(404).send({
+                message: 'User does not exist',
+                statusCode: '404',
+                statusType: 'failed'
+            })
         }
-        throw err;
     }).catch(err => {
         res.status(400).send({
             statusCode: 404,
@@ -66,7 +76,7 @@ exports.updateUser = function (req,res){
             username: req.body.username
         },{
             where: { 
-                id: req.params.userId 
+                id: req.params.id
             }
     }).then( updated => { 
         if(updated !=0 ){
@@ -77,7 +87,6 @@ exports.updateUser = function (req,res){
                 statusType: 'success'
             })
         }
-        throw err;
     }).catch(err => {
         res.status(404).send({
             statusCode: 404,
@@ -86,6 +95,3 @@ exports.updateUser = function (req,res){
         })
     });
 };
-
-
-

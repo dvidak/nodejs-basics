@@ -1,25 +1,34 @@
-let express = require('express');
-let bodyParser = require('body-parser')
-let app = express();
-let models = require('./config/config');
-let cors = require('cors')
-let apiRoutes = require('./routes/index.js')
-const bookController = require('./controller/Book');
+function run(callback) {
+
+    const express = require('express');
+    const bodyParser = require('body-parser')
+    const app = express();
+    const cors = require('cors');
+    const apiRoutes = require('./routes/index.js');
+
+    app.use(cors())
+    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(bodyParser.json());
+    app.use('/api/',apiRoutes);
 
 
+    var server = app.listen(3000, function () {
+        console.log('started');
 
-app.use(cors())
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use('/',apiRoutes);
+        if (callback) {
+            callback();
+        }
+    });
 
+    server.on('close', function () {
+        console.log('closed');
+    });
 
-models.sequelize.sync({}).then(() => {
-    app.listen(1000, () => {
-        console.log('Test - port 1000');
-    })
-});
+    return server;
+}
 
+if (require.main === module) {
+    run();
+}
 
-module.exports = app; // for testing
-
+exports.run = run;

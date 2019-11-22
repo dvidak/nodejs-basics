@@ -1,20 +1,17 @@
 {
   "main": "server.js",
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "chai-http": "^2.0.1",
-    "mocha": "^6.2.2"
-  },
   "scripts": {
-    "start": "node server.js",
-    "test": "mocha --timeout 10000"
+    "test": "node jasmine.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "jasmine": "^3.5.0",
+    "jasmine-console-reporter": "^3.1.0",
     "jsonwebtoken": "^8.5.1",
     "pg": "^7.12.1",
+    "request": "^2.88.0",
     "sequelize": "^5.21.1"
   }
 }

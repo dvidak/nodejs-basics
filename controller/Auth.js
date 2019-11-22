@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const authService = require('../service/auth');
 
 
-exports.login = function (req, res){
+exports.login = function (req, res){     
     return authService.authenticate(req.body).then(loginData => {
         res.send({
             success: true,
@@ -12,21 +12,32 @@ exports.login = function (req, res){
         });
     }).catch(err => {
         res.send({
-            success: false,
-            message: err.message
+            statusCode: 404,
+            message: err.message,
+            statusType: 'error'
         });
     })
 };
 
 exports.register = function (req, res){
+    if (JSON.stringify(req.body) == "{}") {
+        return res.status(400).json({ Error: "Registration request body is empty" });
+    }
+    
+    if (!req.body.email || !req.body.username || !req.body.password) {
+        return res.status(400).json({ Error: "Missing fields for registration" });
+    }
+
     return authService.getUserByUsername(req.body.username || '')
     .then(exists => {
         if (exists){
             return res.send({
-                success: false,
-                message: 'Neuspjesna'
+                statusCode: 404,
+                message: 'User already exists',
+                statusType: 'error'
             });
         }
+
         var user = {
             username: req.body.username,
             name: req.body.name,
@@ -36,7 +47,11 @@ exports.register = function (req, res){
         }
     
         return authService.addUser(user).then(() => 
-            res.send({ success: true })
+            res.send({
+                statusCode: 201,
+                message: 'User created',
+                statusType: 'success'
+            })
         ); 
     });
 };

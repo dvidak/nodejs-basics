@@ -38,6 +38,6 @@ exports.getUserByUsername = username => Users.findOne({
     where: {
         username
     }
-});
+})
 
 exports.addUser = user => Users.create(user);
