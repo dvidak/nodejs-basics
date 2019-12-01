@@ -18,7 +18,7 @@ router.post('/users', authController.register);
 router.get('/users',verifyToken, userController.getAll)
 router.get('/users/:id',verifyToken,userController.getUserById);
 router.get('/users/:userId/books',verifyToken, bookController.getAllBooksByUser);
-router.delete('/users/:id',verifyToken, userController.deleteUser);
+router.delete('/users/:username',verifyToken, userController.deleteUser);
 router.put('/users/:id',verifyToken,userController.updateUser);
 
 router.get('/',function(req,res) {

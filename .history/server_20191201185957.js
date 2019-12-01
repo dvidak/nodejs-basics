@@ -11,10 +11,13 @@ function run(callback) {
     app.use(bodyParser.json());
     app.use('/api/',apiRoutes);
 
-    
+
     var server = app.listen(3000, function () {
-        console.log('opened ')
-        
+        models.sequelize.sync({}).then(() => {
+            app.listen(1000, () => {
+                console.log('Test - port 1000');
+            })
+                
 
         if (callback) {
             callback();

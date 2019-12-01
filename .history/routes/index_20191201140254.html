@@ -1,0 +1,68 @@
+<html>
+<head>
+  <title>API</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div style="margin:0px;">
+    <nav class="navbar navbar-inverse navbar-static-top">
+  <div class="container">
+    <a class="navbar-brand" href="/">API</a>
+    <ul class="nav navbar-nav">
+    </ul>
+  </div>
+</nav>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+          <h3>USERS</h3>
+          <h4><b>GET</b></h4>
+          <h5>Fetching all users</h5>
+          <b>api/users</b>
+          <h5>Fetching user with a given id</h5>
+          <b>api/users/:id</b>
+          <h5>Fetching all books by user with a given id</h5>
+          <b>api/users/:id/books</b>
+
+          <h4><b>POST</b></h4>
+          <h5>Register new user</h5>
+          <b>api/users</b>
+          <h5>Login user</h5>
+          <b>api/login</b>
+    
+          <h4><b>PUT</b></h4>
+          <h5>Update username of existing user with a given id</h5>
+          <b>api/users/:id</b>
+          
+          <h4><b>DELETE</b></h4>
+          <h5>Delete user with a given id</h5>
+          <b>api/users/:id</b>
+      </div>
+      <div class="col-sm-4">
+          <h3>BOOKS</h3>
+          <h4><b>GET</b></h4>
+          <h5>Fetching all books</h5>
+          <b>api/books</b>
+          <h5>Fetching book with a given id</h5>
+          <b>api/books/:id</b>
+    
+          <h4><b>POST</b></h4>
+          <h5>Create new book</h5>
+          <b>api/books</b>
+    
+          <h4><b>PUT</b></h4>
+          <h5>Update book title for book with a given id</h5>
+          <b>api/books/:id</b>
+    
+          <h4><b>DELETE</b></h4>
+          <h5>Delete book with a given id</h5>
+          <b>api/books/:id</b>
+      </div> 
+    </div>
+  </div>
+  </div>
+</body>
+</html>

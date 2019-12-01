@@ -39,7 +39,6 @@ exports.register = function (req, res){
         }
 
         var user = {
-            id: req.body.id,
             username: req.body.username,
             name: req.body.name,
             lastname: req.body.lastname,

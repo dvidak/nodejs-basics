@@ -11,21 +11,27 @@ function run(callback) {
     app.use(bodyParser.json());
     app.use('/api/',apiRoutes);
 
+    models.sequelize.sync({}).then(() => {
+        app.listen(1000, () => {
+            console.log('Test - port 1000');
+        })
+    });
+
     
-    var server = app.listen(3000, function () {
-        console.log('opened ')
+    // var server = app.listen(3000, function () {
+    //     console.log('opened ')
         
 
-        if (callback) {
-            callback();
-        }
-    });
+    //     if (callback) {
+    //         callback();
+    //     }
+    // });
 
-    server.on('close', function () {
-        console.log('closed');
-    });
+    // server.on('close', function () {
+    //     console.log('closed');
+    // });
 
-    return server;
+    // return server;
 }
 
 if (require.main === module) {

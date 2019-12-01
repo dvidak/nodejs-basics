@@ -11,8 +11,9 @@ function run(callback) {
     app.use(bodyParser.json());
     app.use('/api/',apiRoutes);
 
-    
-    var server = app.listen(3000, function () {
+
+    var server = models.sequelize.sync({}).then(() => {
+        app.listen(3000, function () {
         console.log('opened ')
         
 

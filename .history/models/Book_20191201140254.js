@@ -4,7 +4,7 @@ const book = (sequelize, DataTypes) => {
         type: DataTypes.BIGINT,
         allowNull: false,
         primaryKey: true,
-        autoIncrement: false
+        autoIncrement: true
       },
       title: {
         type: DataTypes.STRING,

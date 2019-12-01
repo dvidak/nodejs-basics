@@ -45,7 +45,7 @@ exports.getUserById = function(req,res){
 exports.deleteUser = function (req,res){
     Users.destroy({
         where: {
-            id: req.params.id
+            username: req.params.username
         }
     }).then( deleted => { 
         if(deleted != 0){
