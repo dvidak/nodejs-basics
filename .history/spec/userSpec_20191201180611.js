@@ -82,7 +82,7 @@ describe('logged in', () => {
     });
 
     it('it should not get user with invalid id', (done) => {
-        request.get(`${endpoint}/100`, function (error, response) {
+        request.get(`${endpoint}/10`, function (error, response) {
             expect(response.statusCode).toEqual(404);
             done();
         }).setHeader('x-access-token', token);
@@ -96,7 +96,7 @@ describe('logged in', () => {
     });
 
     it('it should delete user', (done) => {
-        request.delete(`${endpoint}/testUsername`, function (error, response) {
+        request.delete(`${endpoint}/newUsername`, function (error, response) {
             expect(response.statusCode).toEqual(204);
             done();
         }).setHeader('x-access-token', token);

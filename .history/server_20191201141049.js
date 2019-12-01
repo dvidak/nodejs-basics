@@ -13,7 +13,11 @@ function run(callback) {
 
 
     var server = app.listen(3000, function () {
-        console.log('opened')
+        models.sequelize.sync({}).then(() => {
+            app.listen(1000, () => {
+                console.log('Test - port 1000');
+            })
+        });
         
 
         if (callback) {

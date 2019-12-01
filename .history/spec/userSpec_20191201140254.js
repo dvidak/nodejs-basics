@@ -82,14 +82,14 @@ describe('logged in', () => {
     });
 
     it('it should not get user with invalid id', (done) => {
-        request.get(`${endpoint}/100`, function (error, response) {
+        request.get(`${endpoint}/10`, function (error, response) {
             expect(response.statusCode).toEqual(404);
             done();
         }).setHeader('x-access-token', token);
     });
 
     it('it should update user', (done) => {
-        request.put(`${endpoint}/2`,{json: true, body: {username: 'newUsername'}}, function (error, response) {
+        request.put(`${endpoint}/1`,{json: true, body: {username: 'newUsername'}}, function (error, response) {
             expect(response.statusCode).toEqual(201);
             done();
         }).setHeader('x-access-token', token);

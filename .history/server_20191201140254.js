@@ -13,8 +13,7 @@ function run(callback) {
 
 
     var server = app.listen(3000, function () {
-        console.log('opened')
-        
+        console.log('started');
 
         if (callback) {
             callback();
